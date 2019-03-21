@@ -63,9 +63,11 @@ function buildCharts(sample) {
     var rdataarray = [];
     for (i=0; i < dataarray[2].length; i++) {
       rdataarray.push([dataarray[0][i], dataarray[1][i], dataarray[2][i]]);
+      console.log("Building rdataarray", dataarray[0][i], dataarray[1][i], dataarray[2][i])
+      console.log(rdataarray)
     };
     console.log("UNSORTED", rdataarray);
-    // Sort the 3 x N array based on values in the sample_values array
+    // Sort the N x 3 array based on values in the sample_values array
     rdataarray.sort(function(a, b) { return b[2] - a[2] });
     console.log("SORTED", rdataarray);
 
