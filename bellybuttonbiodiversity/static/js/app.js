@@ -23,12 +23,9 @@ function buildMetadata(sample) {
 }
 
 function buildCharts(sample) {
-  console.log("builtCharts")
 
   url = "/samples/" + sample;
   d3.json(url).then(function(response) {
-    console.log(response);
-    console.log(response.otu_ids);
 
     var bubbletrace = {
       x : response.otu_ids,
@@ -63,24 +60,26 @@ function buildCharts(sample) {
     var rdataarray = [];
     for (i=0; i < dataarray[2].length; i++) {
       rdataarray.push([dataarray[0][i], dataarray[1][i], dataarray[2][i]]);
-      console.log("Building rdataarray", dataarray[0][i], dataarray[1][i], dataarray[2][i])
-      console.log(rdataarray)
+
     };
-    console.log("UNSORTED", rdataarray);
     // Sort the N x 3 array based on values in the sample_values array
     rdataarray.sort(function(a, b) { return b[2] - a[2] });
-    console.log("SORTED", rdataarray);
 
     // Slice out the top 10 by sample_values
     var topvalues = rdataarray.slice(0, 10);
 
-  
-    console.log(topvalues);
+    // Now turn rdataarray back into a 3xN array for graqphing
+    var piedata = [[], [], []];
+    for (i=0; i < topvalues[0].length; i++) {
+      for (j=0; j< topvalues.length; j++) {
+        piedata[i].push(topvalues[j][i])
+      };
+    };
 
     var pietrace = {
-      values : topvalues[2],
-      labels : topvalues[0],
-      hovertext : topvalues[1], 
+      values : piedata[2],
+      labels : piedata[0],
+      hovertext : piedata[1], 
       textinfo : "percent",
       type: "pie"
     };
