@@ -120,7 +120,6 @@ pytest==3.3.2
 python-dateutil==2.6.1
 pytz==2017.3
 PyWavelets==0.5.2
-pywinpty==0.5
 PyYAML==3.12
 pyzmq==16.0.3
 QtAwesome==0.4.4
